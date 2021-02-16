@@ -30,6 +30,7 @@ jobs:
         with:
           path: |
             ./*
+            ~/.npm
           key: ${{ github.sha }}
   build-core-react:
     name: Build core-react 🔧
@@ -41,6 +42,7 @@ jobs:
         with:
           path: |
             ./*
+            ~/.npm
           key: ${{ github.sha }}
       - run: pnpm build:core-react
   # build-tokens:
