@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           check-latest: true
       - name: Install pnpm
-        run: npm i -g pnpm
+        run: npm i pnpm
       - name: Install dependencies
         run: pnpm recursive install
       - name: The github sha is
