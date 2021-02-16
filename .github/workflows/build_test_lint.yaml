@@ -24,37 +24,30 @@ jobs:
         uses: pnpm/action-setup@v1.2.1
         with:
           version: latest
-          run_install: |
-            - recursive: true
+          # run_install: |
+          #   - recursive: true
       - name: Cache files 📄
         uses: actions/cache@v2
         id: files
         with:
-          path: ./*
-          key: ${{ github.sha }}
-      - name: Cache node modules 📄
-        uses: actions/cache@v2
-        id: node-modules
-        with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
+          path: |
+            ./*
+            **/node_modules
           key: ${{ github.sha }}
   build-core-react:
+    name: Build core-react 🔧
     runs-on: ubuntu-latest
     needs: setup
     steps:
       - uses: actions/cache@v2
         id: files
         with:
-          path: ./*
+          path: |
+            ./*
+            **/node_modules
           key: ${{ github.sha }}
-      - uses: actions/cache@v2
-        id: node-modules
-        with:
-          path: ~/.npm
-          key: ${{ github.sha }}
-      - name: Build core-react 🔧
-        run: pnpm build:core-react
+
+      - run: pnpm build:core-react
   # build-tokens:
   #   runs-on: ubuntu-latest
   #   needs: setup
