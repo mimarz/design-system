@@ -120,7 +120,7 @@ jobs:
       - name: Test eds-core-react
         run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run test
   lint:
-    name: Lint eds-core-react
+    name: Lint
     runs-on: ubuntu-latest
     needs: setup
     steps:
@@ -132,8 +132,8 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
-      - name: Lint core-react and storybook stories
-        run: ./pnpm/bin/pnpm run lint ./libraries/core-react
+      - name: Lint
+        run: ./pnpm/bin/pnpm run lint ./libraries/*
 
   build-storybook:
     name: Build Storybook
