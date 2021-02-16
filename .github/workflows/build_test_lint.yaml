@@ -64,6 +64,8 @@ jobs:
             ./*
             ~/.pnpm-store
           key: ${{ github.sha }}
+      - name: Print pnpm-store
+        run: ls ~/.pnpm-store
       - run: pnpm build:core-react
   # build-tokens:
   #   runs-on: ubuntu-latest
