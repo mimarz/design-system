@@ -24,8 +24,8 @@ jobs:
         uses: pnpm/action-setup@v1.2.1
         with:
           version: latest
-          # run_install: |
-          #   - recursive: true
+          run_install: |
+            - recursive: true
       - name: Cache files 📄
         uses: actions/cache@v2
         id: files
