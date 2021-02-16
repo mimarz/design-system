@@ -46,8 +46,10 @@ jobs:
             ./*
             **/node_modules
           key: ${{ github.sha }}
-
-      - run: pnpm build:core-react
+      - uses: pnpm/action-setup@v1.2.1
+        with:
+          version: latest
+        run: pnpm build:core-react
   # build-tokens:
   #   runs-on: ubuntu-latest
   #   needs: setup
