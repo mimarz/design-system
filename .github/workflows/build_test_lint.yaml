@@ -7,8 +7,6 @@ on:
   push:
     branches:
       - develop
-    paths:
-      - 'libraries/core-react/**'
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -16,10 +14,10 @@ jobs:
       - name: Checkout, install pnpm & cache 🛎️
         run: |
           REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
-          git clone --filter=blob:none --depth 1 --sparse $REPO .
+          git clone -b ci/actions --filter=blob:none --no-checkout --depth 1 --sparse $REPO .
           git sparse-checkout init --cone
           git sparse-checkout set libraries/core-react libraries/tokens libraries/icons
-          git checkout ci/actions
+          git checkout
       - name: Install pnpm & dependencies 📦
         uses: pnpm/action-setup@v1.2.1
         with:
