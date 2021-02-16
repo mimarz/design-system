@@ -24,6 +24,7 @@ jobs:
         uses: pnpm/action-setup@v1.2.1
         with:
           version: latest
+          bin_dest: ./pnpm/bin
           run_install: |
             - recursive: true
       - name: Print github sha
@@ -66,9 +67,9 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
-      - name: Print pnpm-store
-        run: ls ~/setup-pnpm
-      - run: ~/setup-pnpm/bin/pnpm build:core-react
+      - name: Print
+        run: ls ./pnpm/bin
+      - run: ./pnpm/bin build:core-react
   # build-tokens:
   #   runs-on: ubuntu-latest
   #   needs: setup
