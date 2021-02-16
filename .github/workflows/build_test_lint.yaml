@@ -37,7 +37,7 @@ jobs:
   build-tokens:
     name: Build eds-tokens
     runs-on: ubuntu-latest
-    needs: setup
+    needs: [test, lint]
     steps:
       - uses: actions/cache@v2
         name: Get base files
@@ -56,7 +56,7 @@ jobs:
   build-icons:
     name: Build eds-icons
     runs-on: ubuntu-latest
-    needs: setup
+    needs: [test, lint]
     steps:
       - uses: actions/cache@v2
         name: Get base files
@@ -75,7 +75,7 @@ jobs:
   build-core-react:
     name: Build eds-core-react
     runs-on: ubuntu-latest
-    needs: [lint, test]
+    needs: [build-icons, build-tokens]
     steps:
       - uses: actions/cache@v2
         name: Get base files
@@ -107,38 +107,38 @@ jobs:
   test:
     name: Test eds-core-react
     runs-on: ubuntu-latest
-    needs: [build-icons, build-tokens]
+    needs: setup
     steps:
       - uses: actions/cache@v2
-        name: Get eds-core-react build 📦
+        name: Get base files
         with:
           path: |
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-          key: ${{ github.sha }}-build-core-react
+          key: ${{ github.sha }}
       - name: Test eds-core-react
         run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run test
   lint:
     name: Lint eds-core-react
     runs-on: ubuntu-latest
-    needs: [build-icons, build-tokens]
+    needs: setup
     steps:
       - uses: actions/cache@v2
-        name: Get eds-core-react build 📦
+        name: Get base files
         with:
           path: |
             ./*
             ~/.pnpm-store
             ~/setup-pnpm
-          key: ${{ github.sha }}-build-core-react
+          key: ${{ github.sha }}
       - name: Lint core-react and storybook stories
         run: ./pnpm/bin/pnpm run lint ./libraries/core-react
 
   build-storybook:
     name: Build Storybook
     runs-on: ubuntu-latest
-    needs: setup
+    needs: [test, lint]
     steps:
       - uses: actions/cache@v2
         name: Get base files
