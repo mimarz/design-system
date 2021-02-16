@@ -48,11 +48,9 @@ jobs:
         run: ls
       - run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
       - uses: actions/cache@v2
-        env:
-          lib: tokens
         with:
-          path: ./libraries/{{ env.lib }}/*
-          key: ${{ github.sha }}-build-${{ env.lib }}
+          path: ./libraries/tokens
+          key: ${{ github.sha }}-build-tokens
       - name: Print
         run: ls ./libraries/tokens
   build-icons:
@@ -71,11 +69,9 @@ jobs:
       - run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
       - uses: actions/cache@v2
         name: Cache icons build 📦
-        env:
-          lib: icons
         with:
           path: ./libraries/icons
-          key: ${{ github.sha }}-build-${{ env.lib }}
+          key: ${{ github.sha }}-build-icons
       - name: Print
         run: ls ./libraries/icons
   build-core-react:
@@ -85,24 +81,20 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: |
-            ./libraries/core-react
+            ./*
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}
       - uses: actions/cache@v2
         name: Get icons build 🔧
-        env:
-          lib: icons
         with:
           path: ./libraries/icons
-          key: ${{ github.sha }}-build-${{ env.lib }}
+          key: ${{ github.sha }}-build-icons
       - uses: actions/cache@v2
         name: Get tokens build 🔧
-        env:
-          lib: tokens
         with:
-          path: ./libraries/{{ env.lib }}/*
-          key: ${{ github.sha }}-build-${{ env.lib }}
+          path: ./libraries/tokens
+          key: ${{ github.sha }}-build-tokens
       - name: Print Icons
         run: ls ./libraries/icons
       - name: Print tokens
