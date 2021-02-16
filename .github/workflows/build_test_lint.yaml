@@ -47,7 +47,7 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Print
-        run: ls ./
+        run: ls
       - run: ./pnpm/bin/pnpm --filter @equinor/eds-tokens run build
       - uses: actions/cache@v2
         env:
@@ -68,7 +68,7 @@ jobs:
             ~/setup-pnpm
           key: ${{ github.sha }}
       - name: Print
-        run: ls ./pnpm/bin
+        run: ls
       - run: ./pnpm/bin/pnpm --filter @equinor/eds-icons run build
       - uses: actions/cache@v2
         env:
