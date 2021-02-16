@@ -21,7 +21,7 @@ jobs:
           git sparse-checkout set libraries/core-react libraries/tokens libraries/icons
           git checkout
       - name: Use Node.js ${{ matrix.node-version }}.x
-        uses: actions/setup-node@main
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           check-latest: true
