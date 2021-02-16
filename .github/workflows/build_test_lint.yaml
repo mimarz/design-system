@@ -67,7 +67,7 @@ jobs:
           key: ${{ github.sha }}
       - name: Print
         run: ls ./pnpm/bin
-      - run: ./pnpm/bin build:core-react
+      - run: ./pnpm/bin/pnpm run build:core-react
   # build-tokens:
   #   runs-on: ubuntu-latest
   #   needs: setup
