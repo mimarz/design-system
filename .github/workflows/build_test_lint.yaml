@@ -20,19 +20,16 @@ jobs:
           git sparse-checkout init --cone
           git sparse-checkout set libraries/core-react libraries/tokens libraries/icons
           git checkout
-      - name: Install pnpm 📦
-        uses: pnpm/action-setup@v1.2.1
+      - uses: actions/setup-node@v2
         with:
-          version: latest
-          run_install: |
-            - recursive: true
+          node-version: '14'
+      - run: npm install pnpm
       - name: Cache files 📄
         uses: actions/cache@v2
         id: files
         with:
           path: |
             ./*
-            **/node_modules
           key: ${{ github.sha }}
   build-core-react:
     name: Build core-react 🔧
@@ -44,11 +41,7 @@ jobs:
         with:
           path: |
             ./*
-            **/node_modules
           key: ${{ github.sha }}
-      - uses: pnpm/action-setup@v1.2.1
-        with:
-          version: latest
       - run: pnpm build:core-react
   # build-tokens:
   #   runs-on: ubuntu-latest
