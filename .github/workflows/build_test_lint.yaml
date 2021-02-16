@@ -17,10 +17,9 @@ jobs:
         run: |
           REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
           git clone --filter=blob:none --no-checkout --depth 1 --sparse $REPO .
-          git checkout ci/actions
           git sparse-checkout init --cone
           git sparse-checkout set libraries/core-react libraries/tokens libraries/icons
-          git checkout
+          git checkout ci/actions
       - name: Install pnpm & dependencies 📦
         uses: pnpm/action-setup@v1.2.1
         with:
