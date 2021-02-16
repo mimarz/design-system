@@ -135,9 +135,18 @@ jobs:
       - name: Lint core-react and storybook stories
         run: ./pnpm/bin/pnpm run lint ./libraries/core-react
 
-  # build-storybook:
-  #   runs-on: ubuntu-latest
-  #   needs: setup
-  #   steps:
-  #     - name: Build storybook 🔧
-  #       run: pnpm build:storybook
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/cache@v2
+        name: Get base files
+        with:
+          path: |
+            ./*
+            ~/.pnpm-store
+            ~/setup-pnpm
+          key: ${{ github.sha }}
+      - name: Build storybook 🔧
+        run: ./pnpm/bin/pnpm --filter @equinor/eds-core-react run build:storybook
