@@ -1,4 +1,4 @@
-name: Publish storybook
+name: Push storybook
 on: workflow_dispatch
 jobs:
   setup:
