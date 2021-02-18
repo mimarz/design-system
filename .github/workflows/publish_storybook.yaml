@@ -99,8 +99,6 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-        env:
-          image_name: ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds/storybook-react:${{ github.sha }}
       - run: |
-          docker build -t ${{ env.image_name }} -f ./libraries/core-react/Dockerfile.storybook .
-          docker push ${{ env.image_name }}
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds/storybook-react:${{ github.sha }} -f ./libraries/core-react/Dockerfile.storybook .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds/storybook-react:${{ github.sha }}
