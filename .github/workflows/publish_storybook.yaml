@@ -1,12 +1,5 @@
-name: build, test & lint
-on:
-  workflow_dispatch:
-  pull_request:
-    branches:
-      - develop
-  push:
-    branches:
-      - develop
+name: Publish storybook
+on: workflow_dispatch
 jobs:
   setup:
     name: Setup base files
