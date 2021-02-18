@@ -1,5 +1,5 @@
 name: Publish storybook
-on: [workflow_dispatch]
+on: workflow_dispatch
 jobs:
   setup:
     name: Setup base files
