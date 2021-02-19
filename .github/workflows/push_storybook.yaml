@@ -106,6 +106,8 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+        env:
+          TAG_NAME: ${{ github.run_number }}_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}
       - run: |
-          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ github.run_number }}_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }} -f ./libraries/core-react/Dockerfile.storybook .
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ github.run_number }}_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ env.TAG_NAME }} -f ./libraries/core-react/Dockerfile.storybook .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ env.TAG_NAME }}
