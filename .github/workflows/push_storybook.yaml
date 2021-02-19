@@ -100,14 +100,15 @@ jobs:
             ~/.pnpm-store
             ~/setup-pnpm
           key: ${{ github.sha }}-build-storybook
-      - name: 'Build and push image'
+      - name: 'Login to registry'
         uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: 'Build and push image'
         env:
           TAG_NAME: ${{ github.run_number }}_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}
-      - run: |
+        run: |
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ env.TAG_NAME }} -f ./libraries/core-react/Dockerfile.storybook .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eds-storybook:${{ env.TAG_NAME }}
